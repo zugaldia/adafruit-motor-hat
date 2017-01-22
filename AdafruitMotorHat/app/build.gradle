@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    compile project (':lib')
     compile 'com.android.support:appcompat-v7:25.1.0'
 
     provided 'com.google.android.things:androidthings:0.1-devpreview'

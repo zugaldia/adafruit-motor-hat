@@ -1,13 +1,38 @@
 package com.zugaldia.adafruit.motorhat;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
+
+  private static final String LOG_TAG = MainActivity.class.getSimpleName();
+
+  private DCTest test;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+
+    try {
+      Log.d(LOG_TAG, "Launching demo.");
+      test = new DCTest();
+      for (int motorIndex = 1; motorIndex <= 4; motorIndex++) {
+        Log.d(LOG_TAG, String.format("Running motor %d", motorIndex));
+        test.run(motorIndex);
+      }
+    } catch (InterruptedException e) {
+      Log.d(LOG_TAG, "Demo failed:", e);
+    }
+  }
+
+  @Override
+  protected void onDestroy() {
+    super.onDestroy();
+
+    // Don't forget to close at exit
+    Log.d(LOG_TAG, "Closing demo.");
+    test.close();
   }
 }
