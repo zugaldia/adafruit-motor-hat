@@ -2,7 +2,7 @@
 
 Android Things driver for Adafruit's [DC &amp; Stepper Motor Hat for Raspberry Pi](https://www.adafruit.com/product/2348).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NBnw2-xwH00" frameborder="0" allowfullscreen></iframe>
+[![image](https://cloud.githubusercontent.com/assets/6964/22185065/79e5f2f6-e0ac-11e6-8600-0a52cb6fe9fa.png)](https://www.youtube.com/watch?v=NBnw2-xwH00)
 
 This is a port of the [original Python library](https://github.com/adafruit/Adafruit-Motor-HAT-Python-Library) from Adafruit to Android Things. Please note this is still a work in progress, as only DC motors are supported (contributions to support stepper motors are most welcome though).
 
