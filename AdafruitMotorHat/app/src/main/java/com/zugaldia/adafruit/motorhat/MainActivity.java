@@ -15,16 +15,22 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    try {
-      Log.d(LOG_TAG, "Launching demo.");
-      test = new DCTest();
-      for (int motorIndex = 1; motorIndex <= 4; motorIndex++) {
-        Log.d(LOG_TAG, String.format("Running motor %d", motorIndex));
-        test.run(motorIndex);
+    // Don't block the UI thread
+    new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Log.d(LOG_TAG, "Launching demo.");
+          test = new DCTest();
+          for (int motorIndex = 1; motorIndex <= 4; motorIndex++) {
+            Log.d(LOG_TAG, String.format("Running motor %d", motorIndex));
+            test.run(motorIndex);
+          }
+        } catch (InterruptedException e) {
+          Log.d(LOG_TAG, "Demo failed:", e);
+        }
       }
-    } catch (InterruptedException e) {
-      Log.d(LOG_TAG, "Demo failed:", e);
-    }
+    }).start();
   }
 
   @Override
@@ -33,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Don't forget to close at exit
     Log.d(LOG_TAG, "Closing demo.");
-    test.close();
+    if (test != null) {
+      test.close();
+    }
   }
 }
